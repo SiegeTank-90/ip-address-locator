@@ -32,7 +32,7 @@ function IPtracker(props) {
     e.preventDefault();
     if (ValidateIPaddress(inputfield) === true) {
       console.log("Passed IP Validation");
-      //     getData(inputfield)
+      getData(inputfield);
     }
   }
 

@@ -1,5 +1,5 @@
 import React from "react";
-import { MapContainer, TileLayer, Marker } from "react-leaflet";
+import { MapContainer, TileLayer, Marker, useMapEvent, useMap } from "react-leaflet";
 import marker from '../images/icon-location.svg'
 import L from "leaflet";
 import HeaderBackground from "../images/pattern-bg.png";
@@ -12,6 +12,17 @@ const myIcon = new L.Icon({
 });
 
 function Map(props) {
+
+function FindCenter() {
+    const map = useMap()
+    map.panTo(props.centerMap)    
+    
+
+    return null
+
+}
+    
+
   return (
     <div className="Background">
       <img
@@ -21,7 +32,7 @@ function Map(props) {
       />
       <div className="MapContainer">
         <MapContainer
-          center={props.centerMap}
+          center={[37.40599, -122.078514]}
           zoom={10}
           scrollWheelZoom={false}
           style={{
@@ -36,7 +47,8 @@ function Map(props) {
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           />
           <Marker icon={myIcon} position={props.centerMap}></Marker>
-        </MapContainer>
+          <FindCenter />
+         </MapContainer>
       </div>
     </div>
   );
