@@ -16,10 +16,10 @@ function ValidateIPaddress(ipaddress) {
 
 function IPtracker(props) {
   const [ipTracker, setIpTracker] = useState({
-    ipaddress: "192.212.174.101",
-    loc: "Brooklyn, New York 10001",
-    tz: "UTC -05:00",
-    isp: "SpaceX Starlink"
+    ipaddress: "8.8.8.8",
+    loc: "Mountain View, California, 94043",
+    tz: "UTC -07:00",
+    isp: "Google LLC"
   });
 
   const [inputfield, setinputField] = useState("");
@@ -55,6 +55,10 @@ function IPtracker(props) {
         tz: "UTC " + response.data.location.timezone,
         isp: response.data.isp
       });
+      props.setCenterMap([
+        response.data.location.lat,
+        response.data.location.lng
+      ]);
     } catch (error) {
       alert(error);
     }
@@ -81,25 +85,27 @@ function IPtracker(props) {
           </div>
           <div className="DataContainer">
             <div className="contentBox">
-              <h5 className="contentHeader">IP ADDRESS</h5>
-              <p className="content">{ipTracker.ipaddress}</p>
+              <div className="contentframe">
+                <h5 className="contentHeader">IP ADDRESS</h5>
+                <p className="content">{ipTracker.ipaddress}</p>
+              </div>
+              <div className="BoxBoder"></div>
             </div>
             <div className="contentBox">
-              <div className="BoxBoder"></div>
               <div className="contentframe">
                 <h5 className="contentHeader">LOCATION</h5>
                 <p className="content">{ipTracker.loc}</p>
               </div>
+              <div className="BoxBoder"></div>
             </div>
             <div className="contentBox">
-              <div className="BoxBoder"></div>
               <div className="contentframe">
                 <h5 className="contentHeader">TIME ZONE</h5>
                 <p className="content">{ipTracker.tz}</p>
               </div>
+              <div className="BoxBoder"></div>
             </div>
             <div className="contentBox">
-              <div className="BoxBoder"></div>
               <div className="contentframe">
                 <h5 className="contentHeader">ISP</h5>
                 <p className="content">{ipTracker.isp}</p>

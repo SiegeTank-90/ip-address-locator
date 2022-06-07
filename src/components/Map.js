@@ -1,9 +1,17 @@
 import React from "react";
-import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
-// import Location from "../images/icon-location.svg";
+import { MapContainer, TileLayer, Marker } from "react-leaflet";
+import marker from '../images/icon-location.svg'
+import L from "leaflet";
 import HeaderBackground from "../images/pattern-bg.png";
 
-function Map() {
+const myIcon = new L.Icon({
+  iconUrl: marker,
+  iconRetinaUrl: marker,
+  popupAnchor: [-0, -0],
+  iconSize: [37, 45]
+});
+
+function Map(props) {
   return (
     <div className="Background">
       <img
@@ -12,19 +20,22 @@ function Map() {
         className="BackgroundHeader"
       />
       <div className="MapContainer">
-        {/* <img className="pointer" src={Location} alt="pointer" /> */}
         <MapContainer
-          center={[51.505, -0.09]}
-          zoom={13}
+          center={props.centerMap}
+          zoom={10}
           scrollWheelZoom={false}
-          style={{ height: "1000px", width: "1000px" }}
+          style={{
+            position: "relative",
+            zIndex: "1",
+            height: "100%",
+            width: "100%"
+          }}
         >
           <TileLayer
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           />
-          <Marker position={[51.505, -0.09]}>
-          </Marker>
+          <Marker icon={myIcon} position={props.centerMap}></Marker>
         </MapContainer>
       </div>
     </div>
